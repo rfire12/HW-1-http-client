@@ -13,7 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("URL: ");
         String url = scanner.nextLine();
-        Document htmlDocument = Jsoup.connect(url).timeout(6000).get();
+        Document htmlDocument = Jsoup.connect(url).get();
 
         System.out.println(String.format("La pagina contiene %d lineas", getNumberOfLines(Jsoup.connect(url).execute().body())));
         System.out.println(String.format("La pagina contiene %d parrafos", getNumberOfParagraphs(htmlDocument)));
@@ -22,7 +22,7 @@ public class Main {
         System.out.println(String.format("La pagina contiene %d formularios con el metodo GET", getForms(htmlDocument, "get")));
         System.out.println();
         printFormsInputsType(htmlDocument);
-        makeRequest(htmlDocument, "http://itachi.avathartech.com:4567/opcion2.html");
+        makeRequest(htmlDocument, url);
     }
 
     private static int getNumberOfLines(String document){
@@ -74,7 +74,6 @@ public class Main {
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
 
         }
